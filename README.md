@@ -2,7 +2,8 @@
 ## keep track of coffees you've drank
 
 **phase 1**
-* text form fields for coffee notes and data by user
+* user creation
+* text form fields for coffee notes
 
 **phase 2**
 * pull data from large third wave roasters
@@ -23,34 +24,34 @@ Coffee reviews - social???!
 /notes/:id -> GET, PUT, DELETE
 
 /users/ -> GET(?), POST
-/users/:id ->
+/users/:id -> GET, PUT, DELETE
 
 ----------------------------------------------------
 
 ###DB schema structure:
 
 **coffee:**
-*roaster
-*price(?)
-*farmer
-*region
-*elevation
-*varietals
-*harvest
-*process
+* roaster
+* price(?)
+* farmer
+* region
+* elevation
+* varietals
+* harvest
+* process
 
 **note:**
-*date/time
-*brew method
-*brew temp
-*brew time
-*dose
-*water
-*comment
+* date/time
+* brew method
+* brew temp
+* brew time
+* dose
+* water
+* comment
 
 **user:**
-*first name
-*last name
-*username
-*email
-*password
+* first name
+* last name
+* username
+* email
+* password
