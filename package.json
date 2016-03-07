@@ -1,17 +1,37 @@
 {
   "name": "coffeenoted",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.13.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.1.0",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
+    "ejs": "^2.4.1",
     "express": "~4.13.1",
+    "express-session": "^1.13.0",
     "jade": "~1.11.0",
+    "mongoose": "^4.4.6",
     "morgan": "~1.6.1",
+    "passport": "^0.3.2",
+    "passport-local-mongoose": "^4.0.0",
     "serve-favicon": "~2.3.0"
-  }
+  },
+  "description": "**phase 1**\r * user creation\r * text form fields for coffee notes",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freeeal/coffeeNoted.git"
+  },
+  "author": "Alan Yan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/freeeal/coffeeNoted/issues"
+  },
+  "homepage": "https://github.com/freeeal/coffeeNoted#readme"
 }
