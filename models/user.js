@@ -8,7 +8,7 @@ var passportLocalMongoose = require('passport-local-mongoose');
 // Local Authentication Strategy of Passport and authenticate the users against a 
 // locally configured Mongo DB instance, storing the user details in the database.
 var bcrypt = require('bcrypt-nodejs');
-var ReviewSchema = mongoose.model('Review').schema;
+var CoffeeSchema = mongoose.model('Coffee').schema;
 
 var UserSchema = new Schema({
 
@@ -16,11 +16,11 @@ var UserSchema = new Schema({
 		id 			 : String, 
 		username	 : { type: String, unique: true },
 		password     : String,
-        email        : String,
-        firstName	 : String,
-   		lastName	 : String
-    }
-    // reviews: [ReviewSchema]
+        email        : String
+     // firstName	 : String,
+   	 // lastName	 : String
+    },
+    coffees: [CoffeeSchema]
 
 });
 

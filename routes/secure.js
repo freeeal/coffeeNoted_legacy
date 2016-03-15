@@ -1,8 +1,7 @@
 // ROUTER THAT HANDLES ALL SECURE PAGES, WHERE USER IS AUTHENTICATED
-var Review = require('../models/review');
-var Book = require('../models/book');
+var Note = require('../models/note');
+var Coffee = require('../models/coffee');
 var User = require('../models/user');
-// CONFIGURE THE MULTER =============================================== for parsing multipart/form-data
 var config = require('../config/config');
 
 module.exports = function(router, passport){
@@ -15,7 +14,6 @@ module.exports = function(router, passport){
         res.redirect('/auth');
     });
 
-    // working here....
     // PROFILE SECTION =========================
     router.get('/profile', function(req, res) {
         res.render('profile', { 
@@ -31,8 +29,7 @@ module.exports = function(router, passport){
     router.param('username', function (req, res, next, username) {
         // perform database query that returns user w/ username when done
         User.findOne({$or: [ 
-                                { 'local.username' : username },
-                                { 'twitter.username' : username }
+                                { 'local.username' : username }
                             ]
                     }, function(err, user) {
 

@@ -27,10 +27,6 @@ else if (process.env.NODE_ENV === 'prod') {
 var db = require('./config/mongoose')();
 
 //===========================================================================================================
-// View Engine Setup
-app.set('views', path.resolve(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -38,6 +34,9 @@ app.use(logger('dev'));
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(cookieParser());
 
+// View Engine Setup
+app.set('views', path.resolve(__dirname, 'views'));
+app.set('view engine', 'ejs');
 // Configure static file serving
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -80,6 +79,7 @@ app.use('/auth', auth);
 var secure = express.Router();
 require('./routes/secure')(secure, passport);
 app.use('/', secure);
+
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   var err = new Error('Not Found');
@@ -117,6 +117,5 @@ app.use('/', secure);
 var server = app.listen(process.env.PORT || 3000, function () {
   console.log('Server listening on port ' + (process.env.PORT || 3000) + '...');
 });
-
 
 module.exports = app;

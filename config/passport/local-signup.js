@@ -30,8 +30,8 @@ module.exports = function(passport) {
                         newUser.local.username = username;
                         newUser.local.password = newUser.generateHash(password);
                         newUser.local.email = req.body.email;
-                        newUser.local.firstName = req.body.firstName;
-                        newUser.local.lastName = req.body.lastName;
+                        // newUser.local.firstName = req.body.firstName;
+                        // newUser.local.lastName = req.body.lastName;
                         
                         // save the user
                         newUser.save(function(err) {
@@ -42,23 +42,23 @@ module.exports = function(passport) {
                             console.log('user registration successful.');    
                             return done(null, newUser);
                         });
-                    }
+                    // }
 
-                    else {
-                        // logged in, connecting a new local account
-                        var user = req.user;
-                        user.local.firstName = req.body.firstName;
-                        user.local.lastName = req.body.lastName;
-                        user.local.email = req.body.email;
-                        user.local.username = username;
-                        user.local.password = user.generateHash(password);
+                    // else {
+                    //     // logged in, connecting a new local account
+                    //     var user = req.user;
+                    //     user.local.firstName = req.body.firstName;
+                    //     user.local.lastName = req.body.lastName;
+                    //     user.local.email = req.body.email;
+                    //     user.local.username = username;
+                    //     user.local.password = user.generateHash(password);
                         
-                        user.save(function(err) {
-                            if (err){
-                                throw err;  
-                            } 
-                            return done(null, user);
-                        });
+                    //     user.save(function(err) {
+                    //         if (err){
+                    //             throw err;  
+                    //         } 
+                    //         return done(null, user);
+                    //     });
 
                     }
                 });

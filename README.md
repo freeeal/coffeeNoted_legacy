@@ -31,6 +31,7 @@ Coffee reviews - social???!
 ###DB schema structure:
 
 **coffee:**
+* :id
 * roaster
 * price(?)
 * farmer
@@ -39,15 +40,7 @@ Coffee reviews - social???!
 * varietals
 * harvest
 * process
-
-**note:**
-* date/time
-* brew method
-* brew temp
-* brew time
-* dose
-* water
-* comment
+* note: {:id? -- date/time, brew method, brew temp, brew time, dose, water, comment}
 
 **user:**
 * first name
@@ -55,3 +48,4 @@ Coffee reviews - social???!
 * username
 * email
 * password
+* coffees {:id}
