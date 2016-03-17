@@ -19,7 +19,7 @@ module.exports = function(passport) {
                     // already exists
                     if (user) {
                         console.log('user already exists with username: ' + username);
-                        return done(null, false, req.flash('message', 'user already exists.'));
+                        return done(null, false, req.flash('signupMessage', 'Username is already taken.'));
                     } 
 
                     if (!req.user) {
@@ -42,25 +42,8 @@ module.exports = function(passport) {
                             console.log('user registration successful.');    
                             return done(null, newUser);
                         });
-                    // }
-
-                    // else {
-                    //     // logged in, connecting a new local account
-                    //     var user = req.user;
-                    //     user.local.firstName = req.body.firstName;
-                    //     user.local.lastName = req.body.lastName;
-                    //     user.local.email = req.body.email;
-                    //     user.local.username = username;
-                    //     user.local.password = user.generateHash(password);
-                        
-                    //     user.save(function(err) {
-                    //         if (err){
-                    //             throw err;  
-                    //         } 
-                    //         return done(null, user);
-                    //     });
-
                     }
+                    
                 });
             });
         })

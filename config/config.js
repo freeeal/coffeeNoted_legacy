@@ -10,9 +10,9 @@ try {
 }
 
 module.exports = {
-	// db: process.env.MONGOLAB_URI || dev['db'],
-	db: 'mongodb://localhost/test'
-	// secretSecret: process.env.SESSION_SECRET || dev['sessionSecret'],
+	db: process.env.MONGOLAB_URI || dev['db'],
+	// db: 'mongodb://localhost/test'
+	sessionSecret: process.env.SESSION_SECRET || dev['sessionSecret']
 	// facebook: {
 	// 	clientID: process.env.FACEBOOK_ID || dev.facebook.clientID,
 	// 	clientSecret: process.env.FACEBOOK_SECRET || dev.facebook.clientSecret,

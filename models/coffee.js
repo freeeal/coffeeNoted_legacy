@@ -4,16 +4,23 @@ var Schema = mongoose.Schema;
 
 var CoffeeSchema = new Schema({
 
+    id: Schema.Types.ObjectId,
     coffeeName: {
     	type: String,
     	trim: true
     },
-    authorName: String,
+    roaster: String,
+    price: Number,
+    producer: String,
+    region: String,
+    elevation: String,
+    varietals: String,
+    harvest: String,
+    process: String,
     notes: [{
-    	type: Schema.Types.ObjectId, 
-    	ref: 'Note'
-    }],
-    imageUrl: String
+        body: String,
+    	date: { type: Date, default: Date.now }
+    }]
 
 });
 

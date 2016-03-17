@@ -3,7 +3,7 @@
 //   credentials (in this case, a username and password), and invoke a callback
 //   with a user object. This queries the database...
 
-var LocalStrategy   = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 var User = require('../../models/user');
 
 module.exports = function(passport) {
@@ -21,12 +21,12 @@ module.exports = function(passport) {
                     // Username does not exist, log the error and redirect back
                     if (!user) {
                         console.log('user not found with username ' + username);
-                        return done(null, false, req.flash('message', 'username does not exist.'));                 
+                        return done(null, false, req.flash('loginMessage', 'Username does not exist.'));                 
                     }
                     // User exists but wrong password, log the error 
                     if (!user.validPassword(password)) {
                         console.log('invalid password');
-                        return done(null, false, req.flash('message', 'invalid password.')); // redirect back to login page
+                        return done(null, false, req.flash('loginMessage', 'Invalid password.')); // redirect back to login page
                     }
                     // User and password both match, return user from done method
                     // which will be treated like success

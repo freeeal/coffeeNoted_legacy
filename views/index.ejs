@@ -1,29 +1,13 @@
-<%- include('layout-head') -%> 
-		<!-- Fixed navbar -->
-	    <div class="navbar navbar-default navbar-fixed-top">
-	      <div class="container">
-	        <div class="navbar-header">
-	          <a class="navbar-brand" href="/auth"><b>coffeeNoted</b></a>
-	        </div>
-	        <div class='navbar-action'>
-	          <ul class="nav navbar-nav navbar-right">
-	          	<% if (!user) { %>
-	            	<li><a href="/auth/login">Log in</a></li>
-				<% } else{ %>
-	            	<li><a href="/auth/logout">Log out</a></li>
-	         	<% } %>
-	          </ul>
-	        </div>
-	      </div>
-	    </div>
+<%- include('partials/layout-head') -%> 
+<%- include('partials/navbar') -%>		
 
 		<div id="headerwrap">
 			<div class="container">
 				<div class="row centered">
 					<div class="col-xs-6 col-md-4"></div>
 					<div class="col-xs-6 col-md-4">
-						<h3>Track the coffees you love.</h3>
-						<button type="submit" class="btn btn-warning btn-lg">Get Started</button>				
+						<h3 class="slogan">Track the coffees you love.</h3>
+						<a href="/auth/register" class="btn btn-warning btn-lg">Get Started</a>				
 					</div>
 					<div class="col-xs-6 col-md-4"></div>	
 				</div><!-- /row -->
@@ -44,7 +28,7 @@
 				<div class="col-xs-6 col-md-4">
 					<img src="../images/ser01.png" width="180" alt="">
 					<h4>Track Your Coffees</h4>
-					<p>Track your coffees' roaster, price, farmer, region, elevation, varietal, harvest, process.</p>
+					<p>Track your favorite coffees based on roaster, region, producer, and process.</p>
 				</div>
 
 				<div class="col-xs-6 col-md-4">
@@ -61,4 +45,4 @@
 			</div><!-- /row -->
 		</div><!-- /container -->
 
-<%- include('layout-foot') -%> 
+<%- include('partials/layout-foot') -%> 

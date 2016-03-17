@@ -1,0 +1,26 @@
+<%- include('partials/layout-head') -%> 
+<%- include('partials/navbar') -%>		
+
+		<div id="headerwrap">
+			<div class="container">
+				<div class="row centered">
+					<div class="col-xs-6 col-md-4"></div>
+					<div class="col-xs-6 col-md-4">
+						<div class="review-wall">
+							<form class="form-review" role="form" action="/auth/login" method="POST">
+							  <div class="form-group">
+							  	<input type="text" class="form-control" name="username" placeholder="Username" required="true">
+							  </div>
+							  <div class="form-group">
+							    <input type="password" class="form-control" name="password" placeholder="Password" required="true">
+							  </div>
+							  <button type="submit" class="btn btn-warning btn-lg">Review</button>
+							</form>	
+						</div>	
+					</div>
+					<div class="col-xs-6 col-md-4"></div>
+				</div><!-- /row -->
+			</div><!-- /container -->
+		</div><!-- /headerwrap -->
+
+<%- include('partials/layout-foot') -%> 

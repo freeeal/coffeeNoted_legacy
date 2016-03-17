@@ -34,7 +34,7 @@ Coffee reviews - social???!
 * :id
 * roaster
 * price(?)
-* farmer
+* producer/farmer
 * region
 * elevation
 * varietals

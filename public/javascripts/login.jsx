@@ -31,7 +31,7 @@
 // 	document.getElementById('example')
 // );
 
-	          {% if (!user) { %}
+	          <% if (!user) { %>
 	            	<li><a href="/auth/login">Log in</a></li>
 	            <% } %>
 	          	<% } else { %>

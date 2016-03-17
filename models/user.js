@@ -20,7 +20,10 @@ var UserSchema = new Schema({
      // firstName	 : String,
    	 // lastName	 : String
     },
-    coffees: [CoffeeSchema]
+    coffees: [{
+        type: Schema.Types.ObjectId, 
+        ref: 'Coffee'
+    }]
 
 });
 

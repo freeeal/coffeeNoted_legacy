@@ -12,11 +12,9 @@ module.exports = function() {
 	// Use Mongoose to connect to MongoDB
 	var db = mongoose.connect(config.db); // connect to MongoDB instance using db property of configuration object
 
-	var notes = require('../models/note');
+	// load models -- necessary?
 	var coffees = require('../models/coffee');
-
-	// Load the 'User' model 
-	var User = require('../models/user');
+	var users = require('../models/user');
 
 	// Attach listener to connected event
 	mongoose.connection.once('connected', function (err) {
