@@ -7,13 +7,12 @@ var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 // Local Authentication Strategy of Passport and authenticate the users against a 
 // locally configured Mongo DB instance, storing the user details in the database.
-var bcrypt = require('bcrypt-nodejs');
+var bcrypt = require('bcrypt');
 var CoffeeSchema = mongoose.model('Coffee').schema;
 
 var UserSchema = new Schema({
 
 	local            : {
-		id 			 : String, 
 		username	 : { type: String, unique: true },
 		password     : String,
         email        : String
@@ -27,22 +26,22 @@ var UserSchema = new Schema({
 
 });
 
-// Set the 'fullName' virtual property for local acct
-UserSchema.virtual('local.fullName').get(function() {
-    if (this.local.firstName == null || this.local.lastName == null)
-        return null;
-    else
-	    return this.local.firstName + ' ' + this.local.lastName;
-}).set(function(fullName) {
-	var splitName = fullName.split(' ');
-	this.local.firstName = splitName[0] || '';
-	this.local.lastName = splitName[1] || '';
-});
+// // Set the 'fullName' virtual property for local acct
+// UserSchema.virtual('local.fullName').get(function() {
+//     if (this.local.firstName == null || this.local.lastName == null)
+//         return null;
+//     else
+// 	    return this.local.firstName + ' ' + this.local.lastName;
+// }).set(function(fullName) {
+// 	var splitName = fullName.split(' ');
+// 	this.local.firstName = splitName[0] || '';
+// 	this.local.lastName = splitName[1] || '';
+// });
 
 // methods ======================
 // generating a hash
 UserSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(9), null);
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
 };
 
 // checking if password is valid

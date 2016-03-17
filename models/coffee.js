@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var CoffeeSchema = new Schema({
 
-    id: Schema.Types.ObjectId,
+    // id: Schema.Types.ObjectId,
     coffeeName: {
     	type: String,
     	trim: true
