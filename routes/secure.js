@@ -14,23 +14,16 @@ module.exports = function(router, passport){
     });
 
     // PROFILE SECTION =========================
-    // router.get('/profile', function(req, res) {
-    //     res.render('profile', { 
-    //         user : req.user,                  // get the user out of session and pass to template
-    //         message : req.flash('message')
-    //     }); 
-    // });
-    
     // all param callbacks are called before any handler of any route in which the param occurs, and they will be called only once in a req-resp cycle
     router.param('username', function (req, res, next, username) {
         // perform database query from User model and returns user as a reqeust object w/ username when done'
-        User.findOne({ 'local.username' : username }, function(err, user) {
+        User.find({ 'local.username' : username }, function(err, user) {
 
             if (err) {
                 return next(err);
             } else if (user) {
                 req.user = user;
-                console.log('user found with username ', user);
+                console.log('user found with username ', username);
                 console.log(user);
                 return next();
             } else {
@@ -145,7 +138,7 @@ module.exports = function(router, passport){
 
     // catch-all route, redirects all invalid paths to the profile
     router.get('/*', function(req, res) {
-        res.redirect('/users/:username');
+        res.redirect('/users/' + req.user.local.username);
     });
 
 }
