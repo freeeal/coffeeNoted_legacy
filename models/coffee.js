@@ -10,7 +10,7 @@ var CoffeeSchema = new Schema({
     	trim: true
     },
     roaster: String,
-    price: Number,
+    // price: Number,
     producer: String,
     region: String,
     elevation: String,

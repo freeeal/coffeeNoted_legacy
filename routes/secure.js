@@ -17,13 +17,13 @@ module.exports = function(router, passport){
     // all param callbacks are called before any handler of any route in which the param occurs, and they will be called only once in a req-resp cycle
     router.param('username', function (req, res, next, username) {
         // perform database query from User model and returns user as a reqeust object w/ username when done'
-        User.find({ 'local.username' : username }, function(err, user) {
+        User.findOne({ 'local.username' : username }, function(err, user) {
 
             if (err) {
                 return next(err);
             } else if (user) {
                 req.user = user;
-                console.log('user found with username ', username);
+                console.log('user found with username:', username);
                 console.log(user);
                 return next();
             } else {
@@ -35,11 +35,13 @@ module.exports = function(router, passport){
     });
 
     // route with parameters (/users/:username)
-    router.get('/users/:username', function(req, res, user) {
-        res.render('profile', { user : req.user }); // get the user out of session and pass to template
+    router.get('/users/:username', function(req, res) {
+        console.log("this is the user obj: " + req.user);
+        // return res.json(req.user);
+        return res.render('profile', { user : req.user }); // get the user out of session and pass to template
     });
 
-    // // ACCEPT REVIEW POSTS TO PROFILE PAGE ======
+    // // ACCEPT COFFEE REVIEWS TO PROFILE PAGE ======
     // router.post('/profile', function(req, res, bookName) {
 
     //     var bookName = req.body.bookName;

@@ -1,3 +1,8 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
     color: #30231d;
     background-color: #f6f1ed;
@@ -5,6 +10,8 @@ body {
     font-weight: 300;
     font-size: 16px;
     padding-top: 70px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
@@ -95,8 +102,8 @@ hr {
 	color: #f6f1ed;
 }
 
-/* HeaderWrap */
-#headerwrap {
+/* Wrappers for Index/Login/Registration pages */
+#indexwrap, #loginwrap, #registerwrap {
     background: url(../images/coffee-landing-3.jpg);
     background-color: #30231d;
     margin-top: -20px;
@@ -117,8 +124,8 @@ hr {
     background-size: cover;
 }
 
-#headerwrap h3 {
-    margin-top: 60px;
+#indexwrap h3, #loginwrap h3, #registerwrap h3 {
+    margin-top: 30px;
     margin-bottom: 15px;
     text-align: center;
     font-size: 40px;
@@ -144,6 +151,14 @@ hr {
     transition-timing-function: ease;
 }
 
+/* Review Form */
+.form-review > input {
+    margin-bottom: 5px;
+}
+
+.form-review > button {
+    margin-top: 10px;
+}
 /* Helpers */
 
 .mt {
@@ -152,8 +167,8 @@ hr {
 }
 
 .form-control {
-    height: 42px;
-    font-size: 18px;
+    height: 40px;
+    font-size: 16px;
     width: 280px;
 }
 
@@ -162,6 +177,16 @@ input {
 }
 
 /* Footer: Copyright; */
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f6f1ed
+}
+
 .copyright {
     padding-top: 30px;
     /*margin-bottom: 100px;*/
