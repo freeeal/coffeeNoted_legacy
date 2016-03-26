@@ -41,8 +41,17 @@ module.exports = function(router, passport){
         return res.render('profile', { user : req.user }); // get the user out of session and pass to template
     });
 
-    // // ACCEPT COFFEE REVIEWS TO PROFILE PAGE ======
-    // router.post('/profile', function(req, res, bookName) {
+    // ACCEPT COFFEE REVIEWS TO PROFILE PAGE ======
+    router.post('/users/:username', function(req, res) { 
+        var newCoffee = new Coffees();
+
+    //                         newReview.reviewer = req.user.local.fullName || req.user.facebook.fullName || req.user.twitter.fullName || req.user.google.fullName;
+    //                         newReview.reviewBody = req.body.reviewBody;
+    //                         newReview.bookName = book.bookName;
+    //                         newReview.ratingValue = req.body.rating;
+    //                         newReview.imageUrl = book.imageUrl;
+    //                         newReview.authorName = book.authorName;
+    });
 
     //     var bookName = req.body.bookName;
     //         // find if the book is in db

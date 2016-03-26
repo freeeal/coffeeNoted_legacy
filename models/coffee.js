@@ -10,7 +10,6 @@ var CoffeeSchema = new Schema({
     	trim: true
     },
     roaster: String,
-    // price: Number,
     producer: String,
     region: String,
     elevation: String,
@@ -18,7 +17,8 @@ var CoffeeSchema = new Schema({
     harvest: String,
     process: String,
     notes: [{
-        body: String,
+        author: String,
+        text: String,
     	date: { type: Date, default: Date.now }
     }]
 
