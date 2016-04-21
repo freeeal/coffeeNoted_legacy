@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 
 //===========================================================================================================
 var config = require('./config/config');
-// console.log(config); // for testing
+console.log(config); // for testing
 // Set the 'NODE_ENV' variable
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
