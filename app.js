@@ -15,9 +15,9 @@ console.log(config); // for testing
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 // process.env.NODE_ENV variable determines our environment and configures Express app accordingly
-if (process.env.NODE_ENV === 'dev') { 
+if (process.env.NODE_ENV === 'dev') {
   app.use(logger('dev'));
-} 
+}
 else if (process.env.NODE_ENV === 'prod') {
   app.use(compress());
 }
@@ -50,7 +50,7 @@ app.use(expressSession({
     secret: 'abc123',
     resave: false,
     saveUninitialized: true,
-    store: new MongoStore({ 
+    store: new MongoStore({
       url: config.db,
       ttl: 3*24*60*60 // stores session 'time to live (in seconds)'
     })
@@ -72,6 +72,9 @@ initPassport(passport); // pass passport in for configuration
 // var api = express.Router();
 // require('./routes/api')(api, passport);
 // app.use('/api', api);
+
+// react route
+require('./routes/react.js')(app);
 
 var auth = express.Router();
 require('./routes/auth')(auth, passport);
