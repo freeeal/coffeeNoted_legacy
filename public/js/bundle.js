@@ -56,7 +56,6 @@
 	var routes = React.createElement(Route, { component: App, path: '/' });
 	
 	document.addEventListener('DOMContentLoaded', function () {
-	
 	  ReactDOM.render(React.createElement(
 	    Router,
 	    null,

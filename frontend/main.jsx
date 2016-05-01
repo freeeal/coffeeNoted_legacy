@@ -13,7 +13,6 @@ var routes = (
 );
 
 document.addEventListener('DOMContentLoaded', function () {
-
   ReactDOM.render(
     <Router>{routes}</Router>, root
     );
