@@ -24,7 +24,7 @@ var UserSchema = new Schema({
         ref: 'Coffee'
     }]
 
-});
+}, { autoIndex: false });
 
 // // Set the 'fullName' virtual property for local acct
 // UserSchema.virtual('local.fullName').get(function() {
