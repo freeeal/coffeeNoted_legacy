@@ -17,9 +17,8 @@ var CoffeeSchema = new Schema({
     harvest: String,
     process: String,
     notes: [{
-        author: String,
-        text: String,
-    	date: { type: Date, default: Date.now }
+        type: Schema.Types.ObjectId, 
+        ref: 'Note'
     }]
 
 });

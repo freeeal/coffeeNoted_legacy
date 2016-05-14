@@ -1,6 +1,7 @@
 // ROUTER THAT HANDLES ALL SECURE PAGES, WHERE USER IS AUTHENTICATED
-var Coffee = require('../models/coffee');
 var User = require('../models/user');
+var Coffee = require('../models/coffee');
+var Note = require('../models/note');
 var config = require('../config/config');
 
 module.exports = function(router, passport){
@@ -43,109 +44,69 @@ module.exports = function(router, passport){
 
     // ACCEPT COFFEE REVIEWS TO PROFILE PAGE ======
     router.post('/users/:username', function(req, res) { 
-        var newCoffee = new Coffees();
+        var coffeeName = req.body.coffeeName;
 
-    //                         newReview.reviewer = req.user.local.fullName || req.user.facebook.fullName || req.user.twitter.fullName || req.user.google.fullName;
-    //                         newReview.reviewBody = req.body.reviewBody;
-    //                         newReview.bookName = book.bookName;
-    //                         newReview.ratingValue = req.body.rating;
-    //                         newReview.imageUrl = book.imageUrl;
-    //                         newReview.authorName = book.authorName;
+        // find if coffee is in DB
+        Coffee.findOne({ 'coffeeName' : coffeeName }, function(err, user, coffee) {
+            var user = req.user;
+
+            if (err) {
+                console.log('error while finding coffee');
+            }
+
+            if (!coffee) {
+                var newCoffee = new Coffee();
+                newCoffee.roaster = req.body.roaster;
+                newCoffee.producer = req.body.producer;
+                newCoffee.region = req.body.region;
+                newCoffee.elevation = req.body.elevation;
+                newCoffee.varietals = req.body.varietals;
+                newCoffee.harvest = req.body.harvest;
+                newCoffee.process = req.body.process;
+
+                var newNote = new Note();
+                newNote.author = req.user.local.username;
+                newNote.text = req.body.note;
+
+                newCoffee.save(function(err, user, coffee) {
+                    if (err) {
+                        console.log('error in saving coffee: ' + err);  
+                        throw err;  
+                    }
+
+                    console.log('coffee note complete.');
+
+                    user.update(
+                        { $push: { coffees: newCoffee }}, { upsert: true }, function(err) {
+                            if (err) {
+                                    console.log(err);
+                            } else {
+                                    console.log('coffee added to user collection coffees array');
+                            }
+                        }
+                    )
+
+                    // coffee.update(
+                    //     { $push: { notes: newNote }}, { upsert: true }, function(err) {
+                    //         if (err) {
+                    //             console.log(err);
+                    //         } else {
+                    //             console.log('note added to coffee collection notes array');
+                    //         }
+                    //     ]
+                    // )
+                    // FIGURE OUT HOW TO UPDATE COFFEE COLLECTION NOTES ARRAY:
+                    // 1. IF NEW COFFEE
+                    // 2. IF EXISTING COFFEE
+                    
+                    return user;      
+                    // return user, coffee;
+                });
+
+                res.redirect('/users/:username');
+            }
+        });
     });
-
-    //     var bookName = req.body.bookName;
-    //         // find if the book is in db
-    //         Book.findOne({ 'bookName' : bookName }, function(err, book, review, user, rating) {
-
-    //             var user = req.user;
-
-    //             if (err) {
-    //                 console.log('error while finding book');
-    //                 throw err;
-    //             }
-
-    //             if (!book) {
-    //                 console.log('cannot find the book: ' + bookName);
-    //                 req.flash('message', 'could not find that book. try again!');
-    //                 res.redirect('/profile');
-    //             }
-
-    //             else {
-    //                 // see if user has already reviewed the book before
-    //                 var query = Review.where({
-    //                     'bookName' : bookName,
-    //                     'reviewer' : req.user.local.fullName || req.user.facebook.fullName || req.user.twitter.fullName || req.user.google.fullName
-    //                 });
-
-    //                 query.findOne(function(err, review) {
-    //                     if (err) {
-    //                         console.log('error while finding review');
-    //                         throw err;
-    //                     }
-
-    //                     if (review) {
-    //                         console.log('you have already reviewed this book');
-    //                         req.flash('message', 'you have already reviewed that book! click the reviews tab in the navbar above to see your review');
-    //                         res.redirect('/profile');
-    //                     }
-
-    //                     else {
-
-    //                         var newReview = new Review();
-
-    //                         newReview.reviewer = req.user.local.fullName || req.user.facebook.fullName || req.user.twitter.fullName || req.user.google.fullName;
-    //                         newReview.reviewBody = req.body.reviewBody;
-    //                         newReview.bookName = book.bookName;
-    //                         newReview.ratingValue = req.body.rating;
-    //                         newReview.imageUrl = book.imageUrl;
-    //                         newReview.authorName = book.authorName;
-
-    //                         newReview.save(function(err) {
-    //                             if (err) {
-    //                                 console.log('error in saving review: ' + err);  
-    //                                 throw err;  
-    //                             }
-
-    //                             console.log('book review complete.');    
-    //                             console.log('book reviewer is ' + newReview.reviewer);
-    //                             console.log('book review: ' + newReview.reviewBody);
-    //                             console.log('book rating is ' + newReview.ratingValue);
-    //                             console.log('book image url is ' + newReview.imageUrl);
-
-    //                             user.update(
-    //                                 { $push: { reviews: newReview }},
-    //                                 { upsert: true }, function(err) {
-    //                                     if (err) {
-    //                                         console.log(err);
-    //                                     }
-    //                                     else {
-    //                                         console.log('review added to user collection reviews array');
-    //                                     }
-    //                                 }
-    //                             )
-
-    //                             book.update(
-    //                                 { $push: { reviews: newReview }},
-    //                                 { upsert: true }, function(err) {
-    //                                     if (err) {
-    //                                         console.log(err);
-    //                                     }
-    //                                     else {
-    //                                         console.log('review added to book collection reviews array');
-    //                                     }
-    //                                 }
-    //                             )
-                                
-    //                             return user, book;
-    //                         });
-
-    //                         res.redirect('/reviews');
-    //                     }
-    //                 })
-    //             }
-    //         })
-
-    // });
 
     // catch-all route, redirects all invalid paths to the profile
     router.get('/*', function(req, res) {
