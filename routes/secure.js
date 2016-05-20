@@ -24,8 +24,8 @@ module.exports = function(router, passport){
                 return next(err);
             } else if (user) {
                 req.user = user;
-                console.log('user found with username:', username);
-                console.log(user);
+                // console.log('user found with username:', username);
+                // console.log(user);
                 return next();
             } else {
                 console.log('failed to load user');
@@ -37,7 +37,7 @@ module.exports = function(router, passport){
 
     // route with parameters (/users/:username)
     router.get('/users/:username', function(req, res) {
-        console.log("this is the user obj: " + req.user);
+        // console.log("this is the user obj: " + req.user);
         // return res.json(req.user);
         return res.render('profile', { user : req.user }); // get the user out of session and pass to template
     });
@@ -55,7 +55,9 @@ module.exports = function(router, passport){
             }
 
             if (!coffee) {
+                console.log('cannot find the coffee: ' + coffeeName);
                 var newCoffee = new Coffee();
+                newCoffee.coffeeName = coffeeName;
                 newCoffee.roaster = req.body.roaster;
                 newCoffee.producer = req.body.producer;
                 newCoffee.region = req.body.region;
@@ -64,17 +66,23 @@ module.exports = function(router, passport){
                 newCoffee.harvest = req.body.harvest;
                 newCoffee.process = req.body.process;
 
-                var newNote = new Note();
-                newNote.author = req.user.local.username;
-                newNote.text = req.body.note;
-
-                newCoffee.save(function(err, user, coffee) {
+                newCoffee.save(function(err, user) {
                     if (err) {
                         console.log('error in saving coffee: ' + err);  
                         throw err;  
                     }
 
-                    console.log('coffee note complete.');
+                    var newNote = new Note();
+                    newNote.coffee = newCoffee;
+                    newNote.author = user;
+                    newNote.text = req.body.note;
+                    newNote.save(function(err, user) {
+                        if (err) {
+                            console.log('error in saving note: ' + err);
+                            throw err;
+                        }
+                        console.log('coffee note complete.');
+                    });
 
                     user.update(
                         { $push: { coffees: newCoffee }}, { upsert: true }, function(err) {
@@ -84,27 +92,52 @@ module.exports = function(router, passport){
                                     console.log('coffee added to user collection coffees array');
                             }
                         }
-                    )
+                    );
 
-                    // coffee.update(
-                    //     { $push: { notes: newNote }}, { upsert: true }, function(err) {
-                    //         if (err) {
-                    //             console.log(err);
-                    //         } else {
-                    //             console.log('note added to coffee collection notes array');
-                    //         }
-                    //     ]
-                    // )
-                    // FIGURE OUT HOW TO UPDATE COFFEE COLLECTION NOTES ARRAY:
-                    // 1. IF NEW COFFEE
-                    // 2. IF EXISTING COFFEE
-                    
-                    return user;      
-                    // return user, coffee;
+                    newCoffee.update(
+                        { $push: { notes: newNote }}, { upsert: true }, function(err) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log('note added to coffee collection notes array');
+                            }
+                        }
+                    );
+     
+                    return user, newCoffee;
                 });
 
-                res.redirect('/users/:username');
+                res.redirect('/');
             }
+
+            // see if user has already noted that coffee before
+            else {
+                console.log('you have already reviewed the coffee before so you just added another note');
+                var newNote = new Note();
+                newNote.coffee = coffee;
+                newNote.author = user;
+                newNote.text = req.body.note;
+                newNote.save(function(err, user) {
+                    if (err) {
+                        console.log('error in saving note: ' + err);
+                        throw err;
+                    }
+                    console.log('coffee note complete.');
+                });
+
+                coffee.update(
+                    { $push: { notes: newNote }}, { upsert: true }, function(err) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log('note added to coffee collection notes array');
+                        }
+                    }
+                );
+
+                return coffee;
+            }
+
         });
     });
 

@@ -49,7 +49,7 @@ UserSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 
-UserSchema.set('toJSON', { getters: true, virtuals: true});	// forces Mongoose to include getters (def: which modify existing data before outputting the documents to the next layer)
+UserSchema.set('toJSON', { getters: true, virtuals: true });	// forces Mongoose to include getters (def: which modify existing data before outputting the documents to the next layer)
 // when converting the MongoDB document to a JSON representation and will allow the output of documents using res.json()
 // to include the getter's behavior
 

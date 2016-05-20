@@ -4,12 +4,14 @@ var Schema = mongoose.Schema;
 
 var NoteSchema = new Schema({
 
-    coffeeName: {
-        type: String,
-        trim: true
+    coffee: {
+        type: Schema.Types.ObjectId, 
+        ref: 'Coffee'
     },
-    // noteId: Schema.Types.ObjectId,
-    author: String,
+    author: {
+    	type: Schema.Types.ObjectId,
+    	ref: 'User'
+    },
     text: String,
     datePublished: {
         type: Date, 

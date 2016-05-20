@@ -3,8 +3,12 @@ var Coffee = require('../models/coffee');
 
 module.exports = function(router, passport){
 
-	router.get('/coffees', function(req, res){
+	router.get('/listCoffees', function(req, res){
 		res.json({ SecretData: 'blegh'});
+	});
+
+	router.get('/listUsers', function(req, res){
+
 	});
 
 	// // log API access requests
